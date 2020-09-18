@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading" style="font-style: oblique">List des Demandes</div>
+    <div class="panel-body">
+      <button class="btn btn-primary" (click)="ongetDemande()"  >
+        Affichage toutes
+      </button>
+    </div>
+    <form #f="ngForm" (ngSubmit)="onChercher(f.value)">
+      <div class="form-group">
+        <div class="col-md-3">
+            <label>Nom :</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nom"
+            ngModel
+          />
+        </div>
+        <div class="col-md-3">
+            <label>Type de stage :</label>
+          <select
+            id="inputselect"
+            class="form-control "
+            name="type"
+            ngModel
+           >
+            <option selected value="Initiation">Initiation</option>
+            <option value="PFE">Projet fin étude</option>
+            <option value="Ouvrier">Stage ouvrier</option>
+            <option value="Perfectionement">Stage de perfectionement</option>
+            <option value="Technicien">Stage Technicien</option>
+            <option value="AUTRE" >Autre..</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+            <label>Statut :</label>
+          <select
+            id="inputState"
+            class="form-control "
+            name="status"
+            ngModel
+           >
+            <option selected value="REALISE">REALISE</option>
+            <option value="ENCOUR">ENCOUR</option>
+            <option value="NON_REALISE">NON_REALISE</option>
+            <option value="ANNULE">ANNULE</option>
+            <option value="AUTRE">AUTRE</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary">Recherche</button>
+        </div>
+      </div>
+    </form>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOM</th>
+            <th>PRENOM</th>
+            <th>DATE DEBUT</th>
+            <th>DATE FIN</th>
+            <th>ETABLISSEMENT</th>
+            <th>TYPE STAGE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of StageDemande">
+            <td>{{ d.id }}</td>
+            <td>{{ d.nom }}</td>
+            <td>{{ d.prenom }}</td>
+            <td>{{ d.dateDebut }}</td>
+            <td>{{ d.datefin }}</td>
+            <td>{{ d.etabilssement }}</td>
+            <td>{{ d.type }}</td>
+            <td>
+              <a
+                class="btn btn-info"
+                (click)="onDetails(d)"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                >Détails</a
+              >
+            </td>
+            <td><a class="btn btn-warning" (click)="onModif(d)">Modifier</a></td>
+            <td><a class="btn btn-danger" (click)="onDelete(d)">Supprimer</a></td>
+            <td><a class="btn btn-success"(click)="onLivrable(d)">Livrables</a></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">Details</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <h3>{{ currantDemande?.nom }} {{ currantDemande?.prenom }}</h3>
+            </div>
+            <mat-tab-group mat-align-tabs="center" dynamicHeight>
+                <mat-tab label="Information personnel">
+                  <ul>
+                    <li>Nom Prénom : {{ currantDemande?.nom }} {{ currantDemande?.prenom }}</li>
+                    <li>Email : {{ currantDemande?.email }}</li>
+                    <li>Tel : {{ currantDemande?.numero }}</li>
+                    <li>Date de Naissance : {{currantDemande?.dateNaissance }}</li>
+                  </ul>
+                </mat-tab>
+                <mat-tab label="Etude et Competance">
+                  <ul>
+                     <li>Etablissement : {{currantDemande?.etabilssement}}</li>
+                     <li>Diplome Projet : {{currantDemande?.diplome}}</li>
+                     <li>Niveau d'etude : {{currantDemande?.classe}}</li>
+                     <li><a href="{{this.satgeservices.host+'/cvProduct/'+currantDemande.id}}">Votre Cv : {{ currantDemande?.cv }}</a></li>
+                  </ul>
+                </mat-tab>
+                <mat-tab label="Stage">
+                  <ul>
+                  <li>Type de Stage : {{currantDemande?.type}}</li>
+                  <li>Date Debut : {{currantDemande?.dateDebut}}</li>
+                  <li>Date Fin : {{currantDemande?.datefin}}</li>
+                  <li>Sujet du Stage : {{currantDemande?.sujet}}</li>
+                  <li>Description  : {{currantDemande?.description}}</li>
+                  <li>Statut  : {{currantDemande?.status}}</li>
+                  </ul>
+                </mat-tab>
+              </mat-tab-group>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <label>ID:</label><label>{{ currantDemande.id }}</label>
+              <label>Nom:</label><label>{{ currantDemande.nom }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.prenom }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.numero }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.email }}</label>
+              <label>Prenom:</label
+              ><label>{{ currantDemande.etabilssement }}</label>
+              <label>Prenom:</label
+              ><label>{{ currantDemande.dateNaissance }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.dateDebut }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.datefin }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.diplome }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.classe }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.type }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.stageof }}</label>
+              <label>Prenom:</label><label>{{ currantDemande.sujet }}</label>
+              <label>Prenom:</label
+              ><label>{{ currantDemande.description }}</label> -->
+</div>

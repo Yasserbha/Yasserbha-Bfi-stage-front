@@ -1,0 +1,235 @@
+<div class="container" *ngIf="currantDemande">
+  <form #f="ngForm" (ngSubmit)="onupdateDemandeStage(f.value)">
+    <ul>
+      <h2><li class="bottom_bar">Information personnel</li></h2>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Nom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputEmail4"
+              placeholder="nom"
+              name="nom"
+              #name="ngModel"
+              ngModel
+              required
+              [(ngModel)]="currantDemande.nom"
+            />
+            <div *ngIf="name.touched && name.invalid">
+              <p class="alert alert-danger">champ obligatoire</p>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Prenom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputPassword4"
+              placeholder="Prenom"
+              name="prenom"
+              ngModel
+              [(ngModel)]="currantDemande.prenom"
+            />
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="inputAddress">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputAddress"
+            placeholder="Email"
+            name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            #email="ngModel"
+            ngModel
+            required
+            [(ngModel)]="currantDemande.email"
+          />
+          <div *ngIf="email.touched">
+              <p *ngIf="email.errors.required" class="alert alert-danger">Email is a required field</p>
+              <p *ngIf="email.errors.pattern" class="alert alert-danger">This is not a valid Email</p>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputAddress2">Tél</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputAddress2"
+              placeholder="Numero"
+              name="numero"
+              ngModel
+              [(ngModel)]="currantDemande.numero"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <div class="md-form md-outline input-with-post-icon datepicker">
+              <label for="example">Date Naissance</label>
+              <input
+                placeholder="Select date"
+                type="date"
+                id="example"
+                class="form-control"
+                name="dateNaissance"
+                ngModel
+                [(ngModel)]="currantDemande.dateNaissance"
+              />
+            </div>
+          </div>
+        </div>
+      <h2 class="bottom_bar"><li>Etude et Competance</li></h2>
+      <div class="form-group col-md-12">
+        <label for="inputAddress2">Etablissement</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputA"
+          placeholder="Etablissement"
+          name="etabilssement"
+          ngModel
+          [(ngModel)]="currantDemande.etabilssement"
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputState">Diplome Projte</label>
+          <select id="niv" class="form-control" name="diplome" ngModel [(ngModel)]="currantDemande.diplome">
+            <option selected value="licence">Licence</option>
+            <option value="Master">Master</option>
+            <option value="Doctorat">Doctorat</option>
+            <option value="Cycle_ingenieur">Cycle_ingenieur</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputState">Niveau d'etude</label>
+          <select id="classe" class="form-control" name="classe" ngModel [(ngModel)]="currantDemande.classe">
+            <option selected value="Premiaire_année">1ere année</option>
+            <option value="Deuxieme_année">2eme année</option>
+            <option value="Troisieme_année">3eme année</option>
+            <option value="Quartrieme_année">4eme année </option>
+          </select>
+        </div>
+
+      </div>
+      <h2><li class="bottom_bar">Stage</li></h2>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <div class="md-form md-outline input-with-post-icon datepicker">
+            <label for="example">Date debut</label>
+            <input
+              placeholder="Select date"
+              type="date"
+              id="dateDebut"
+              class="form-control"
+              name="dateDebut"
+              ngModel
+              [(ngModel)]="currantDemande.dateDebut"
+            />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <div class="md-form md-outline input-with-post-icon datepicker">
+            <label for="example">Date fin</label>
+            <input
+              placeholder="Select date"
+              type="date"
+              id="datefin"
+              class="form-control"
+              name="datefin"
+              ngModel
+              [(ngModel)]="currantDemande.datefin"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="inputState">Type de stage</label>
+          <select id="inputState" class="form-control" name="type" ngModel [(ngModel)]="currantDemande.type">
+            <option selected value="Initiation">Initiation</option>
+            <option value="PFE">PFE</option>
+            <option value="Ouvrier">stage ouvrier</option>
+            <option value="Perfectionement">stage de perfectionement</option>
+            <option value="Technicien">stage Technicien</option>
+          </select>
+        </div>
+
+        <label for="inputState">Votre Satge est :</label>
+        <div class="form-group form-group col-md-12">
+          <label class="form-check form-check-inline form-group col-md-4">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="stageof"
+              value="Facultatif"
+              [(ngModel)]="currantDemande.stageof"
+              ngModel
+            />
+            <span class="form-check-label"> Facultatif </span>
+          </label>
+          <label class="form-check form-check-inline form-group col-md-4">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="stageof"
+              value="Obligatoire"
+              [(ngModel)]="currantDemande.stageof"
+              ngModel
+            />
+            <span class="form-check-label"> Obligatoire</span>
+          </label>
+        </div>
+
+
+
+            <div class="form-group col-md-12">
+              <label for="inputState">Status</label>
+              <select id="inputState" class="form-control" name="status" ngModel [(ngModel)]="currantDemande.status">
+                <option selected value="ENCOUR">ENCOUR</option>
+                <option value="REALISE">REALISE</option>
+                <option value="NON_REALISE">NON_REALISE</option>
+                <option value="ANNULE">ANNULE</option>
+              </select>
+            </div>
+
+
+        <div class="form-group col-md-6">
+          <label for="inputCity">Sujet</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="sujet"
+            placeholder="Sujet"
+            name="sujet"
+            rows="3"
+            ngModel
+            [(ngModel)]="currantDemande.sujet"
+          ></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputCity">Description</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="description"
+            placeholder="Dscription"
+            name="description"
+            rows="3"
+            ngModel
+            [(ngModel)]="currantDemande.description"
+          ></textarea>
+        </div>
+      </div>
+    </ul>
+
+    <div class="form-group col-md-12">
+      <button type="submit" [disabled]="!f.valid" class="btn btn-primary" id="btn">
+        Ajouter Modification
+      </button>
+    </div>
+  </form>
+</div>

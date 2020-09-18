@@ -1,0 +1,11 @@
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+#btn{
+  color: aliceblue;
+  background-color: brown
+}
+

@@ -1,0 +1,17 @@
+.centerize{
+  text-align: center;
+}
+.bottom_bar {
+  width: fit-content;
+  margin: 20px;
+  color: brown;
+  font-family: 'Courier New', Courier, monospace;
+
+
+}
+#btn{
+  float:right;
+  background-color: brown;
+  color: aliceblue
+}
+

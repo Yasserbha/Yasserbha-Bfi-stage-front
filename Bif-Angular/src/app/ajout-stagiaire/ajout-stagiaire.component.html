@@ -1,0 +1,271 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="onSaveDemandeStage(f.value)">
+    <ul>
+      <h2><li class="bottom_bar">Informations personnelles</li></h2>
+        <div class="form-row">
+          <div class="form-group col-md-6" [class.has-error]="name.touched && name.invalid" [class.has-success]="name.valid">
+            <label for="inputEmail4">Nom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputEmail4"
+              placeholder="nom"
+              name="nom"
+              #name="ngModel"
+              ngModel
+              required
+            />
+            <span *ngIf="name.touched && name.invalid" class="help-block">
+             champ obligatoire
+            </span>
+          </div>
+
+          <div class="form-group col-md-6" [class.has-error]="Prenom.touched && Prenom.invalid" [class.has-success]="Prenom.valid">
+            <label for="inputPassword4">Prenom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputPassword4"
+              placeholder="Prenom"
+              name="prenom"
+              #Prenom="ngModel"
+              required
+              ngModel
+            />
+            <span *ngIf="Prenom.touched && Prenom.invalid" class="help-block">
+              champ obligatoire
+             </span>
+          </div>
+        </div>
+        <div class="form-group col-md-12" [class.has-error]="email.touched && email.invalid" [class.has-success]="email.valid">
+          <label for="inputAddress">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputAddress"
+            placeholder="Email"
+            name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            #email="ngModel"
+            ngModel
+            required
+          />
+          <span *ngIf="email.errors?.required && email.touched " class="help-block">
+            champ obligatoire
+           </span>
+           <span *ngIf="email.errors?.pattern && email.touched" class="help-block">
+            champ incorrecte
+           </span>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6"[class.has-error]="numero.touched && numero.invalid" [class.has-success]="numero.valid">
+            <label for="inputAddress2">Tél</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="inputNumero"
+              placeholder="Numero"
+              name="numero"
+              #numero="ngModel"
+              pattern="[0-9]{8}"
+              required
+
+              ngModel
+            />
+            <span *ngIf="numero.errors?.required && numero.touched " class="help-block">
+              champ obligatoire
+             </span>
+            <span *ngIf="numero.errors?.pattern && numero.touched" class="help-block">
+              champ incorrect
+             </span>
+          </div>
+          <div class="form-group col-md-6">
+            <div class="md-form md-outline input-with-post-icon datepicker">
+              <label for="example">Date Naissance</label>
+              <input
+                placeholder="Select date"
+                type="date"
+                id="example"
+                class="form-control"
+                name="dateNaissance"
+                ngModel
+              />
+            </div>
+          </div>
+        </div>
+      <h2 class="bottom_bar"><li>Etudes et Compétences</li></h2>
+      <div class="form-group col-md-12">
+        <label for="inputAddress2">Etablissement</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputA"
+          placeholder="Etablissement"
+          name="etabilssement"
+          ngModel
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputState">Diplome envisagé</label>
+          <select id="niv" class="form-control" name="diplome" ngModel>
+            <option selected value="licence">Licence</option>
+            <option value="Master">Master</option>
+            <option value="Doctorat">Doctorat</option>
+            <option value="Cycle_ingenieur">Cycle_ingenieur</option>
+            <option value="AUTRE">Autre...</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">Niveau d'etude</label>
+          <select id="classe" class="form-control" name="classe" ngModel>
+            <option selected value="Premiaire_année">1ere année</option>
+            <option value="Deuxieme_année">2eme année</option>
+            <option value="Troisieme_année">3eme année</option>
+            <option value="Quartrieme_année">4eme année </option>
+            <option value="AUTRE">Autre...</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Ajouter Cv</label>
+          <input
+            class="form-control"
+            type="file"
+            id="cv"
+            (change)="selectFile($event)"
+            name="cv"
+            ngModel
+          />
+        </div>
+      </div>
+      <h2><li class="bottom_bar">Stage</li></h2>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <div class="md-form md-outline input-with-post-icon datepicker">
+            <label for="example">Date début</label>
+            <input
+              placeholder="Select date"
+              type="date"
+              id="dateDebut"
+              class="form-control"
+              name="dateDebut"
+              ngModel
+            />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <div class="md-form md-outline input-with-post-icon datepicker">
+            <label for="example">Date fin</label>
+            <input
+              placeholder="Select date"
+              type="date"
+              id="datefin"
+              class="form-control"
+              name="datefin"
+              ngModel
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="inputState">Type de stage</label>
+          <select id="inputState" class="form-control" name="type" ngModel>
+            <option selected value="Initiation">Initiation</option>
+            <option value="PFE">Projet fin étude</option>
+            <option value="Ouvrier">Stage ouvrier</option>
+            <option value="Perfectionement">Stage de perfectionement</option>
+            <option value="Technicien">Stage Technicien</option>
+            <option value="AUTRE">Autre...</option>
+          </select>
+        </div>
+
+        <label for="inputState">Votre Satge est :</label>
+        <div class="form-group form-group col-md-12">
+          <label class="form-check form-check-inline form-group col-md-4">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="stageof"
+              value="Facultatif"
+              ngModel
+            />
+            <span class="form-check-label"> Facultatif </span>
+          </label>
+          <label class="form-check form-check-inline form-group col-md-4">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="stageof"
+              value="Obligatoire"
+              ngModel
+            />
+            <span class="form-check-label"> Obligatoire</span>
+          </label>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Ajouter demande</label>
+          <input
+            class="form-control"
+            type="file"
+            id="demande"
+            (change)="selectFile2($event)"
+            name="demande"
+            ngModel/></div>
+
+            <div class="form-group col-md-6">
+              <label for="inputState">Statut</label>
+              <select id="inputState" class="form-control" name="status" ngModel>
+                <option selected value="ENCOUR">ENCOURS</option>
+                <option value="REALISE">REALISE</option>
+                <option value="NON_REALISE">NON_REALISE</option>
+                <option value="ANNULE">ANNULE</option>
+              </select>
+            </div>
+
+
+        <div class="form-group col-md-6" [class.has-error]="sujet.touched && sujet.invalid" [class.has-success]="sujet.valid">
+          <label for="inputCity">Sujet</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="sujet"
+            placeholder="Sujet"
+            name="sujet"
+            #sujet="ngModel"
+            rows="3"
+            ngModel
+            required
+          ></textarea>
+          <span *ngIf="sujet.touched && sujet.invalid" class="help-block">
+            champ obligatoire
+           </span>
+        </div>
+        <div class="form-group col-md-6"  [class.has-error]="description.touched && description.invalid" [class.has-success]="description.valid">
+          <label for="inputCity">Description</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="description"
+            placeholder="Dscription"
+            name="description"
+            rows="3"
+            #description="ngModel"
+            ngModel
+            required
+          ></textarea>
+          <span *ngIf="description.touched && description.invalid" class="help-block">
+            champ obligatoire
+           </span>
+        </div>
+      </div>
+    </ul>
+
+    <div class="form-group col-md-12">
+      <button type="submit" [disabled]="!f.valid" class="btn btn" id="btn">
+        Ajouter Demande
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+<div class="panel-body">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>DESINGINATION</th>
+        <th>DATE POSTULATION</th>
+        <th>FILE </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of Livrable">
+        <td>{{ d.id }}</td>
+        <td>{{ d.designation }}</td>
+        <td>{{ d.datePostule }}</td>
+      <td><a href="{{this.satgeservices.host+'/photoProduct/'+d.id}}">{{ d.file }}</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<form #f="ngForm" (ngSubmit)="onSaveLivrable(f.value)">
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="inputEmail4">Designation</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputdesignation"
+      placeholder="designation"
+      name="designation"
+      #name="ngModel"
+      ngModel
+      required
+    />
+  </div>
+  <div class="form-group col-md-6">
+    <label>Livrable</label>
+    <input
+      class="form-control"
+      type="file"
+      id="file"
+      (change)="selectFile($event)"
+      name="file"
+      ngModel/></div>
+</div>
+<div class="form-group col-md-12">
+  <button type="submit" class="btn btn" id="btn" >
+    Ajouter livrable
+  </button>
+</div>
+</form>
+
+</div>
